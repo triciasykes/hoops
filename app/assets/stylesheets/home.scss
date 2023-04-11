@@ -1,0 +1,23 @@
+
+.home-wrapper {
+  height: 100vh;
+}
+
+.image-div {
+  background-image: url("/arcade2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  
+}
+
+.home-text {
+  text-align: center;
+  color: #fff;
+  box-shadow: 1rem;
+  
+}
+
+.nav-link {
+  display: flex;
+}
