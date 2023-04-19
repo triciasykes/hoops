@@ -1,15 +1,13 @@
 import React from 'react'
-import { InputGroup, Label, Input } from "reactstrap"
+import { InputGroup, Button, Input } from "reactstrap"
 
 const NameInputs = (props) => {
-  console.log(props)
-
-    return(
-      <div>
-        <InputGroup>
-          <Input onChange={props.onChange} onClick={props.onClick} />
-        </InputGroup>
-    </div>
+  return(
+    <InputGroup>
+      <Button onClick={props.onClick}>
+        <Input onChange={props.onChange} onClick={props.onClick} value={props.value} />
+      </Button>
+    </InputGroup>
   )
 }
 

@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: hoops_bracket_production
-  username: hoops_bracket
-  password: <%= ENV["HOOPS_BRACKET_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>

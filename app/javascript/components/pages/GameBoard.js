@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NameInputs from '../components/NameInputs'
 import WinnerName from '../components/WinnerName'
+import Champion from '../components/Champion'
 import { Label } from 'reactstrap'
+import { useNavigate } from 'react-router-dom'
 
 const GameBoard = () => {
-
+  const navigate= useNavigate()
   const [startingPlayers, setStartingPlayers] = useState([
     {name:""},
     {name:""},
@@ -21,10 +23,11 @@ const GameBoard = () => {
   const [winner3, setWinner3] = useState("")
   const [winner4, setWinner4] = useState("")
 
-  const [semis1, setSemis1] = useState("")
-  const [semis2, setSemis2] = useState("")
+  const [round2A, setRound2A] = useState("")
+  const [round2B, setRound2B] = useState("")
 
-  const [finalWinner, setFinalWinner] = useState("")
+  const [champion, setChampion] = useState("")
+
 
 
   const handleChange = (e) =>{
@@ -32,6 +35,15 @@ const GameBoard = () => {
     setStartingPlayers(player)
   }
 
+
+  const [winnerHistory, setWinnerHistory] = useState([])
+
+  useEffect(() => {
+    readWinners()
+  }, [])
+  
+ 
+   
   const winner1Click = (e) => {
     let winnerName = e.target.value
     setWinner1(winnerName)
@@ -52,20 +64,19 @@ const GameBoard = () => {
     setWinner4(winnerName)
   }
 
-  const semiWinner1Click = (e) => {
-    let semiWinner1 = e.target.value
-    console.log(semiWinner1)
-    setSemis1(semiWinner1)
-  }
   const semiWinner2Click = (e) => {
-    let semiWinner2 = e.target.value
-    setSemis2(semiWinner2)
+    let winner = e.target.value
+    setRound2B(winner)
   }
+  const semiWinner1Click = (e) => {
+    let winner = e.target.value
+    setRound2A(winner)
 
-  const finalWinnerClick = (e) => {
-    let finalWinner = e.target.value
-    setFinalWinner(finalWinner)
   }
+  const setChampionClick = (e) => {
+    let champion = e.target.value
+    setChampion(champion)
+    }
 
   return(
     <div id="main-gameboard"> 
@@ -77,7 +88,6 @@ const GameBoard = () => {
       <div className="player-two">
         <Label>Player Two</Label>
         <NameInputs onClick={winner1Click} onChange={handleChange} />
-
       </div>
       <div className="player-three">
         <Label>Player Three</Label>
@@ -105,7 +115,7 @@ const GameBoard = () => {
       </div>
       <div className="winner-1">
         <Label>Quarterfinal Winner 1</Label>
-        <WinnerName onClick={semiWinner1Click} winner={winner1}/>
+        <WinnerName onClick={semiWinner1Click} winner={winner1} />
       </div>
       <div className="winner-2">
         <Label>Quarterfinal Winner 2</Label>
@@ -117,19 +127,18 @@ const GameBoard = () => {
       </div>
       <div className="winner-4">
         <Label>Quarterfinal Winner 4</Label>
-        <WinnerName  onClick={semiWinner2Click} winner={winner4}/>
+        <WinnerName onClick={semiWinner2Click}  winner={winner4}/>
       </div>
       <div className="semi-winner-1">
         <Label>Semifinal Winner 1</Label>
-        <WinnerName onClick={semiWinner1Click} winner={semis1}/>
+        <WinnerName onClick={setChampionClick}  winner={round2A}/>
       </div>
       <div className="semi-winner-2">
         <Label>Semifinal Winner 2</Label>
-        <WinnerName onClick={setFinalWinner} winner={semis2}/>
+        <WinnerName onClick={setChampionClick}  winner={round2B}/>
       </div>
       <div className="winner-final">
-        <Label>Winner!</Label>
-        <WinnerName onClick={finalWinnerClick} winner={finalWinner} />
+        <Champion champion={champion} onClick={addWinner} />
       </div>
     </div>
   )

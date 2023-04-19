@@ -16,6 +16,11 @@ const Navigation = () => {
           Play
         </NavLink>
       </NavItem>
+      <NavItem>
+        <NavLink to="/players" className="nav-link">
+          Winner's Board
+        </NavLink>
+      </NavItem>
     </Nav>
   )
 }

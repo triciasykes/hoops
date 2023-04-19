@@ -1,12 +1,14 @@
 import React from 'react'
-import { InputGroup, Input } from 'reactstrap'
+import { InputGroup, Input, Button } from 'reactstrap'
 
 const WinnerName = (props) => {
 
   return (
     <div>
       <InputGroup>
-        <Input value={`${props.winner}`}/>
+        <Button>
+          <Input value={`${props.winner}`} onChange={props.onChange} onClick={props.onClick}/>
+        </Button>
       </InputGroup>
     </div>
   ) 
