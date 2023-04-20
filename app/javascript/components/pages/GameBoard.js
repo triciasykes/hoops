@@ -28,19 +28,38 @@ const GameBoard = () => {
 
   const [champion, setChampion] = useState("")
 
+  const [winnerHistory, setWinnerHistory] = useState([])
 
 
   const handleChange = (e) =>{
     let player = e.target.value
     setStartingPlayers(player)
   }
+  const winnerChange = (e) => {
+    let winner = e.target.value
+    console.log(winner)
+  }
 
 
-  const [winnerHistory, setWinnerHistory] = useState([])
 
-  useEffect(() => {
-    readWinners()
-  }, [])
+  // useEffect(() => {
+  //   readWinners()
+  // }, [])
+  const readWinners = () => {
+    fetch('/players' )
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+   }
+
+   const addWinner = (winner) => {
+    fetch('/players', {
+      method: 'post',
+      body: JSON.stringify(winner)
+    })
+    .then(response => console.log(response.json()))
+    .then(() => readWinners())
+    .catch(errors => console.log("winners create errors: ", errors))
+   } 
   
  
    
@@ -115,30 +134,30 @@ const GameBoard = () => {
       </div>
       <div className="winner-1">
         <Label>Quarterfinal Winner 1</Label>
-        <WinnerName onClick={semiWinner1Click} winner={winner1} />
+        <WinnerName onClick={semiWinner1Click} onChange={winnerChange} winner={winner1} />
       </div>
       <div className="winner-2">
         <Label>Quarterfinal Winner 2</Label>
-        <WinnerName onClick={semiWinner1Click} winner={winner2} />
+        <WinnerName onClick={semiWinner1Click} onChange={winnerChange} winner={winner2} />
       </div>
       <div className="winner-3">
         <Label>Quarterfinal Winner 3</Label>
-        <WinnerName onClick={semiWinner2Click} winner={winner3}/>
+        <WinnerName onClick={semiWinner2Click} onChange={winnerChange} winner={winner3}/>
       </div>
       <div className="winner-4">
         <Label>Quarterfinal Winner 4</Label>
-        <WinnerName onClick={semiWinner2Click}  winner={winner4}/>
+        <WinnerName onClick={semiWinner2Click} onChange={winnerChange}  winner={winner4}/>
       </div>
       <div className="semi-winner-1">
         <Label>Semifinal Winner 1</Label>
-        <WinnerName onClick={setChampionClick}  winner={round2A}/>
+        <WinnerName onClick={setChampionClick} onChange={winnerChange} winner={round2A}/>
       </div>
       <div className="semi-winner-2">
         <Label>Semifinal Winner 2</Label>
-        <WinnerName onClick={setChampionClick}  winner={round2B}/>
+        <WinnerName onClick={setChampionClick} onChange={winnerChange} winner={round2B}/>
       </div>
       <div className="winner-final">
-        <Champion champion={champion} onClick={addWinner} />
+        <Champion champion={champion} onChange={winnerChange} onClick={addWinner} />
       </div>
     </div>
   )
