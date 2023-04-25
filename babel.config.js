@@ -17,9 +17,8 @@ module.exports = function(api) {
 
   return {
     presets: [
-      {
-        "presets": ["env", "stage-0"]
-      },
+      ["@babel/preset-env", "@babel/preset-react"],
+
       isTestEnv && [
         '@babel/preset-env',
         {
