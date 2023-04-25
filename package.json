@@ -35,5 +35,9 @@
     "setupFilesAfterEnv": [
       "@testing-library/jest-dom/extend-expect"
     ]
-  }
+  }, "browserslist": [
+    ">0.2%",
+   "not dead",
+   "not op_mini all"
+ ]
 }
